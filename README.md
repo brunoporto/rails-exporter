@@ -65,11 +65,11 @@ You can call `export_to` from **Array** or **ActiveRecord::Relation** objects:
 ```erb
 class UsersController < ApplicationController
   def index
-    @users = User.all #Ou aplique um filtro
+    @users = User.all
     respond_to do |format|
       format.html
       format.csv { send_data @users.export_to(:csv) }
-      format.xml { send_data @users.export_to(:xml)l }
+      format.xml { send_data @users.export_to(:xml) }
       format.xls { send_data @users.export_to(:xls) }
     end
   end

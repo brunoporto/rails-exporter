@@ -1,3 +1,5 @@
+require 'builder'
+
 module RailsExporter
   module Exporter
 
@@ -7,13 +9,12 @@ module RailsExporter
 
     module ClassMethods
       def export_to_csv(records, context=:default)
-        #Gerando CSV com separador ; e usando " nos campos por padrão.
         CSV.generate({:col_sep => ';', :force_quotes => true}) do |csv|
-          #Cabeçalho
+          # HEADER
           csv << get_columns(context).map do |attr|
             attr_name(attr)
           end
-          #DADOS
+          # BODY
           records.each do |record|
             csv << get_values(record, context)
           end
@@ -21,12 +22,12 @@ module RailsExporter
       end
 
       def export_to_xml(records, context=:default)
-        #Gerando arquivo XML
+        #File XML
         xml = Builder::XmlMarkup.new(:indent => 2)
-        #Formando tipo de saida de dados
+        #Format
         xml.instruct! :xml, :encoding => "UTF-8"
         xml.records do
-          #Gerando cada linha de record
+          #Records
           records.each do |record|
             get_values = get_values(record, context)
             xml.record do |r|
