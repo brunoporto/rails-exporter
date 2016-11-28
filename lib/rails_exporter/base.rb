@@ -34,13 +34,11 @@ module RailsExporter
         end
 
         label = I18n.t(attribute, default: [attribute.to_s.humanize], scope: [:exporters, @exporter_name])
-        self.exporters[@exporter_name] << {column: attribute, label: label, type: normalize_type(type), block: block}
+        self.exporters[@exporter_name] << {column: attribute, label: label, type: normalize_type(type), block: (block_given? ? block : nil)}
       end
 
       def columns(exporter_name=:default)
-        self.exporters[exporter_name].map do |attribute|
-          attribute.slice(:column, :label, :type)
-        end
+        self.exporters[exporter_name]
       end
 
       private

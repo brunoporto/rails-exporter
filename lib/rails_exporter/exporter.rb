@@ -34,8 +34,7 @@ module RailsExporter
             xml.record do |r|
               i = 0
               get_columns(context).map do |attr|
-                attr = attr.keys.first if attr.is_a?(Hash)
-                xml.tag!(attr, get_values[i], {title: attr_name(attr)})
+                xml.tag!(attr[:column], get_values[i], {title: attr_name(attr)})
                 i+=1
               end
             end
@@ -80,13 +79,12 @@ module RailsExporter
 
       def get_values(record, context)
         get_columns(context).map do |attribute|
-          if attribute[:block].is_a?(Proc)
+          unless attribute[:block].nil?
             value = attribute[:block].call(record)
-            value.to_s
           else
             value = (record.send(attribute[:column]) rescue '')
-            normalize_value(value, attribute[:type])
           end
+          normalize_value(value, attribute[:type])
         end
       end
 
