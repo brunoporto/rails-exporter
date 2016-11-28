@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   # s.add_dependency "rails", ['>= 3','< 5']
 
   spec.add_dependency 'spreadsheet'
+  spec.add_dependency 'builder'
 
   # s.add_development_dependency "sqlite3"
 end

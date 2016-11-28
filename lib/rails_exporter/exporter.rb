@@ -1,4 +1,5 @@
 require 'builder'
+require 'spreadsheet'
 
 module RailsExporter
   module Exporter
