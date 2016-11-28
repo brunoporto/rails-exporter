@@ -1,0 +1,8 @@
+en:
+  exporters:
+    spreadsheet_name: 'Spreadsheet'
+    example:
+      name: 'Name'
+    another_example:
+      name: 'Name'
+      age: 'Age'

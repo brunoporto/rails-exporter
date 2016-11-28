@@ -1,0 +1,21 @@
+class <%= @exporter_name %>Exporter < RailsExporter::Base
+
+  exporter do
+    column :name
+    column :email
+    column :price => :currency
+    column :is_admin => :boolean
+    column :birthday => :date
+    column :created_at => :datetime
+    column(:account) {|record| record.account.name}
+    column(:updated_at) do |record|
+      record.updated_at.strftime("%d/%m/%Y %H:%M:%S")
+    end
+  end
+
+  # exporter :simple do
+  #   column :nome
+  #   column :email
+  # end
+
+end
