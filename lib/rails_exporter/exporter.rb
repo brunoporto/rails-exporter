@@ -56,8 +56,7 @@ module RailsExporter
         spreadsheet.row(0).default_format = Spreadsheet::Format.new :weight => :bold
         #HEADER
         get_columns(context).each_with_index do |attr, i|
-          attr = attr.keys.first if attr.is_a?(Hash)
-          spreadsheet.row(0).insert i, (self.human_attribute_name(attr) || attr)
+          spreadsheet.row(0).insert i, attr_name(attr)
         end
         #ROWS
         records.each_with_index do |record, i|
