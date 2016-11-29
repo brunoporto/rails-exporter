@@ -76,7 +76,7 @@ class UsersController < ApplicationController
 end
 ```
 
-For `format.xls` maybe you need to declare XLS mimetype in `config/initializers/mime_types` :
+Declare XLS as a new mimetype in `config/initializers/mime_types`:
 ```erb
     Mime::Type.register "application/xls", :xls
 ```
