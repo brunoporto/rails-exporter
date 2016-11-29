@@ -1,6 +1,6 @@
 # Rails Exporter 
 
-Rails Exporter
+Rails Exporter (XML, XLS, CSV)
 
 ## How to install
 
