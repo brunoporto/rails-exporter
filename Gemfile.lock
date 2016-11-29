@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-exporter (0.0.3)
+    rails-exporter (0.0.6)
       builder
       spreadsheet
 
