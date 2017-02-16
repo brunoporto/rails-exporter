@@ -13,15 +13,14 @@ Gem::Specification.new do |spec|
   spec.email       = ["brunotporto@gmail.com"]
   spec.homepage    = "https://github.com/brunoporto/rails-exporter"
   spec.summary     = "Rails Exporter"
-  spec.description = "Rails Exporter"
+  spec.description = "Rails Exporter (CSV, XML, XLS)"
   spec.license     = "MIT"
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  # s.add_dependency "rails", ['>= 3','< 5']
-
-  spec.add_dependency 'spreadsheet'
-  spec.add_dependency 'builder'
+  spec.add_dependency 'rails', ['>= 3','< 6']
+  spec.add_dependency 'spreadsheet', '~> 1.1', '>= 1.1.4'
+  spec.add_dependency 'builder', '~> 3.2', '>= 3.2.3'
 
   # s.add_development_dependency "sqlite3"
 end
