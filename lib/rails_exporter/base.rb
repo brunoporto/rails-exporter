@@ -17,11 +17,11 @@ module RailsExporter
       #   end
       # end
 
-      def exporter(name=:default, &block)
-        (self.exporters ||= {})[name] ||= []
-        @exporter_name = name
+      def exporter(context=:default, &block)
+        (self.exporters ||= {})[context] ||= []
+        @exporter_context = context
         block.call if block_given?
-        self.exporters[name]
+        self.exporters[context]
       end
 
       def column(attr, &block)
@@ -33,8 +33,9 @@ module RailsExporter
           type = :string
         end
 
-        label = I18n.t(attribute, default: [attribute.to_s.humanize], scope: [:exporters, @exporter_name])
-        self.exporters[@exporter_name] << {column: attribute, label: label, type: normalize_type(type), block: (block_given? ? block : nil)}
+        exporter_name_without_suffix = self.to_s.underscore.gsub('_exporter','')
+        label = I18n.t("#{@exporter_context}.#{attribute}", default: [attribute.to_sym, attribute.to_s.humanize], scope: [:exporters, exporter_name_without_suffix])
+        self.exporters[@exporter_context] << {column: attribute, label: label, type: normalize_type(type), block: (block_given? ? block : nil)}
       end
 
       def columns(exporter_name=:default)
