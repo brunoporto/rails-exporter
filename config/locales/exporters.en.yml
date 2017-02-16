@@ -4,5 +4,9 @@ en:
     example:
       name: 'Name'
     another_example:
-      name: 'Name'
-      age: 'Age'
+      default:
+        name: 'My Name'
+        age: 'My Age'
+      context_name:
+        name: 'Name'
+        age: 'Age'
