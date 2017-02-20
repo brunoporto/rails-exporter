@@ -10,10 +10,12 @@ module RailsExporter
 
     module ClassMethods
       def export_to_csv(records, context=:default)
-        CSV.generate({:col_sep => ';', :force_quotes => true}) do |csv|
+        options = {col_sep: settings[context].fetch(:col_sep, ';'),
+                   force_quotes: settings[context].fetch(:force_quotes, true)}
+        CSV.generate(options) do |csv|
           # HEADER
-          csv << get_columns(context).map do |attr|
-            attr_name(attr)
+          if settings[context].fetch(:header, true)
+            csv << get_columns(context).map(&method(:attr_name))
           end
           # BODY
           records.each do |record|
@@ -51,16 +53,18 @@ module RailsExporter
         document = Spreadsheet::Workbook.new
         spreadsheet = document.create_worksheet
         spreadsheet.name = I18n.t(:spreadsheet_name, default: ['Spreadsheet'], scope: [:exporters])
-        #HEADER FORMAT
-        spreadsheet.row(0).default_format = Spreadsheet::Format.new :weight => :bold
-        #HEADER
-        get_columns(context).each_with_index do |attr, i|
-          spreadsheet.row(0).insert i, attr_name(attr)
+        if (need_header = settings[context].fetch(:header, true) )
+          #HEADER FORMAT
+          spreadsheet.row(0).default_format = Spreadsheet::Format.new :weight => :bold
+          #HEADER
+          get_columns(context).each_with_index do |attr, i|
+            spreadsheet.row(0).insert i, attr_name(attr)
+          end
         end
         #ROWS
-        records.each_with_index do |record, i|
+        records.each.with_index(need_header ? 1 : 0) do |record, i|
           values = get_values(record, context)
-          spreadsheet.row(i+1).push(*values)
+          spreadsheet.row(i).push(*values)
         end
         #SAVE spreadsheet
         document.write file_contents
