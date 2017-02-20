@@ -4,7 +4,7 @@ module RailsExporter
   class Base
     include RailsExporter::Exporter
 
-    class_attribute :exporters
+    class_attribute :exporters, :settings
 
     class << self
       def file_types
@@ -17,8 +17,11 @@ module RailsExporter
       #   end
       # end
 
-      def exporter(context=:default, &block)
+      def exporter(*args, &block)
+        options = args.extract_options!
+        context = args.first || :default
         (self.exporters ||= {})[context] ||= []
+        (self.settings ||= {})[context] = options
         @exporter_context = context
         block.call if block_given?
         self.exporters[context]
