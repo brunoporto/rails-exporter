@@ -8,7 +8,7 @@ module RailsExporter
 
     class << self
       def file_types
-        [:csv, :xls, :xml]
+        [:csv, :xls, :xlsx, :xml]
       end
 
       # def method_missing(m, *args, &block)

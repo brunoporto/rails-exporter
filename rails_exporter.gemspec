@@ -19,8 +19,9 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency 'rails', ['>= 3','< 6']
-  spec.add_dependency 'spreadsheet', '~> 1.1', '>= 1.1.4'
-  spec.add_dependency 'builder', '~> 3.2', '>= 3.2.3'
+  spec.add_dependency 'rubyXL', '~> 3.3.22'
+  spec.add_dependency 'spreadsheet', '~> 1.1'
+  spec.add_dependency 'builder', '~> 3.0'
 
   # s.add_development_dependency "sqlite3"
 end

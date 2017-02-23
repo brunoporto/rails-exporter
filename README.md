@@ -78,5 +78,6 @@ end
 
 Declare XLS as a new mimetype in `config/initializers/mime_types`:
 ```erb
-    Mime::Type.register "application/xls", :xls
+    Mime::Type.register "application/vnd.ms-excel", :xls
+    Mime::Type.register "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", :xlsx
 ```

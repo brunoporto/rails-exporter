@@ -1,5 +1,6 @@
 require 'builder'
 require 'spreadsheet'
+require 'rubyXL'
 
 module RailsExporter
   module Exporter
@@ -66,6 +67,27 @@ module RailsExporter
         document.write file_contents
         #RETURN STRING
         file_contents.string.force_encoding('binary')
+      end
+
+      def export_to_xlsx(records, context=:default)
+        #NEW document/spreadsheet
+        workbook = RubyXL::Workbook.new
+        worksheet = workbook[0]
+        # worksheet = workbook.add_worksheet(I18n.t(:spreadsheet_name, default: ['Spreadsheet'], scope: [:exporters]))
+        worksheet.sheet_name = I18n.t(:spreadsheet_name, default: ['Spreadsheet'], scope: [:exporters])
+        #HEADER FORMAT
+        worksheet.change_row_bold(0, true)
+        #HEADER (ROW=0)
+        get_columns(context).each_with_index do |attr, i|
+          worksheet.add_cell(0, i, attr_name(attr))
+        end
+        #ROWS
+        records.each_with_index do |record, row_index|
+          values = get_values(record, context)
+          values.each_with_index{|value, col_index| worksheet.add_cell(row_index+1, col_index, value) }
+        end
+        #RETURN STRING
+        workbook.stream.string.force_encoding('binary')
       end
 
       private
