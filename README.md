@@ -1,6 +1,6 @@
 # Rails Exporter 
 
-Rails Exporter (XML, XLS, CSV)
+Rails Exporter (CSV, XML, XLS, XSLX)
 
 ## How to install
 
@@ -71,6 +71,7 @@ class UsersController < ApplicationController
       format.csv { send_data @users.export_to(:csv) }
       format.xml { send_data @users.export_to(:xml) }
       format.xls { send_data @users.export_to(:xls) }
+      format.xlsx { send_data @users.export_to(:xlsx) }
     end
   end
 end
