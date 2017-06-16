@@ -33,6 +33,7 @@ class ExampleExporter < RailsExporter::Base
     column :email
     column :price => :currency
     column :is_admin => :boolean
+    column :any_time => :time
     column :birthday => :date
     column :created_at => :datetime
     column(:account) {|record| record.account.name}
@@ -60,6 +61,19 @@ You can call `export_to` from **Array** or **ActiveRecord::Relation** objects:
     records.export_to(:xml) # or MyModelExporter.export_to_xml(records)
 ```
 
+### Avaliable Types
+
+You can call `RailsExporter::Base.file_types` to list all supported file types:
+```ruby
+RailsExporter::Base.file_types.each do |type|
+ puts type
+end
+```
+
+### I18n Configuration
+
+Modify you `config/locales/exporters.en.yml`
+
 ### Controller Example
 
 ```erb
@@ -76,6 +90,7 @@ class UsersController < ApplicationController
   end
 end
 ```
+### MimeTypes
 
 Declare XLS as a new mimetype in `config/initializers/mime_types`:
 ```erb

@@ -1,6 +1,9 @@
 en:
   exporters:
     spreadsheet_name: 'Spreadsheet'
+    time_format: "%I:%M %P"
+    date_format: "%m/%d/%Y"
+    datetime_format: "%m/%d/%Y, %I:%M %P"
     example:
       name: 'Name'
     another_example:

@@ -116,12 +116,17 @@ module RailsExporter
           ActionController::Base.helpers.number_to_currency(value)
         elsif type==:boolean
           (value==true or value=='true' or value=='1') ? 'S' : 'N'
+        elsif type==:time
+          locale_format = I18n.t(:time_format, default: ['%H:%M:%S'], scope: [:exporters])
+          (I18n.l(value, format: locale_format) rescue value).to_s
         elsif type==:date
-          (I18n.l(value, format: '%d/%m/%Y') rescue value).to_s
+          locale_format = I18n.t(:date_format, default: ['%d/%m/%Y'], scope: [:exporters])
+          (I18n.l(value, format: locale_format) rescue value).to_s
         elsif type==:datetime
-          (I18n.l(value, format: '%d/%m/%Y %H:%i:%s') rescue value).to_s
+          locale_format = I18n.t(:datetime_format, default: ['%d/%m/%Y %H:%M:%S'], scope: [:exporters])
+          (I18n.l(value, format: locale_format) rescue value).to_s
         else
-          (I18n.l(value) rescue value)
+          (I18n.l(value) rescue value).to_s
         end
       end
 
