@@ -4,13 +4,13 @@ Rails Exporter (CSV, XML, XLS, XSLX)
 
 ## How to install
 
-Add it to your **Gemfile**: 
+Add it to your `Gemfile`: 
 ```ruby
 gem 'rails-exporter'
 ```
 
 Run the following command to install it:
-```sh
+```shell
 $ bundle install
 $ rails generate rails_exporter:install
 ```
@@ -19,7 +19,7 @@ $ rails generate rails_exporter:install
 
 You can generate exporters `app/exporters/example_exporter.rb`
 
-```sh
+```bash
 $ rails generate rails_exporter:exporter example
 ```
 
@@ -70,7 +70,7 @@ You can call `export_to` from **Array** or **ActiveRecord::Relation** objects:
 You can call `RailsExporter::Base.file_types` to list all supported file types:
 ```ruby
 RailsExporter::Base.file_types.each do |type|
- puts type
+  puts type
 end
 ```
 
@@ -80,7 +80,7 @@ Modify you `config/locales/exporters.en.yml`
 
 ### Controller Example
 
-```erb
+```ruby
 class UsersController < ApplicationController
   def index
     @users = User.all
@@ -94,10 +94,11 @@ class UsersController < ApplicationController
   end
 end
 ```
+
 ### MimeTypes
 
 Declare XLS as a new mimetype in `config/initializers/mime_types`:
-```erb
+```ruby
     Mime::Type.register "application/vnd.ms-excel", :xls
     Mime::Type.register "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", :xlsx
 ```
