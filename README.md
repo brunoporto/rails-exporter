@@ -53,7 +53,7 @@ end
 ### How to use
 
 You can call `export_to` from **Array** or **ActiveRecord::Relation** objects: 
-```erb
+```ruby
     records = MyModel.all
     records.export_to(:csv) # or MyModelExporter.export_to_csv(records) 
     
