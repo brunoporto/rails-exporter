@@ -84,7 +84,7 @@ module RailsExporter
         #ROWS
         records.each_with_index do |record, row_index|
           values = get_values(record, context)
-          values.each_with_index{|value, col_index| worksheet.add_cell(row_index+1, col_index, value) }
+          values.each_with_index {|value, col_index| worksheet.add_cell(row_index+1, col_index, value)}
         end
         #RETURN STRING
         workbook.stream.string.force_encoding('binary')
