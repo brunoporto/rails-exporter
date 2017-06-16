@@ -55,10 +55,14 @@ end
 You can call `export_to` from **Array** or **ActiveRecord::Relation** objects: 
 ```erb
     records = MyModel.all
-    records.export_to(:csv) # or MyModelExporter.export_to_csv(records)
+    records.export_to(:csv) # or MyModelExporter.export_to_csv(records) 
     
     records = [MyModel.first, MyModel.last]
     records.export_to(:xml) # or MyModelExporter.export_to_xml(records)
+    
+    ## With context
+    # MyModel.export_to(:csv, context: :simple)
+    # or MyModelExporter.export_to_csv(records, context: :simple)
 ```
 
 ### Avaliable Types
