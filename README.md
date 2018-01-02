@@ -60,9 +60,9 @@ You can call `export_to` from **Array** or **ActiveRecord::Relation** objects:
     records = [MyModel.first, MyModel.last]
     records.export_to(:xml) # or MyModelExporter.export_to_xml(records)
     
-    ## With context
-    # MyModel.export_to(:csv, context: :simple)
-    # or MyModelExporter.export_to_csv(records, context: :simple)
+    ## With context :simple
+    # records.export_to(:csv, :simple)
+    # or MyModelExporter.export_to_csv(records, :simple)
 ```
 
 ### Avaliable Types
