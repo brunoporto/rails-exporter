@@ -2,7 +2,7 @@ require 'simplecov'
 
 SimpleCov.start do
   add_group 'Files', ['rails_exporter', 'lib/rails_exporter']
-  add_filter 'spec'
+  add_filter ['spec','rails-exporter']
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
