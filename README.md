@@ -63,6 +63,9 @@ You can call `export_to` from **Array** or **ActiveRecord::Relation** objects:
     ## With context :simple
     # records.export_to(:csv, :simple)
     # or MyModelExporter.export_to_csv(records, :simple)
+
+    ## CSV Custom Params
+    # records.export_to(:csv, params: {col_sep: ','}))
 ```
 
 ### Avaliable Types

@@ -13,8 +13,9 @@ module RailsExporter
     end
 
     module ClassMethods
-      def export_to_csv(records, context=:default)
-        CSV.generate({:col_sep => ';', :force_quotes => true}) do |csv|
+      def export_to_csv(records, context=:default, params: {})
+        custom_params = {col_sep: ';', force_quotes: true}.merge(params)
+        CSV.generate(custom_params) do |csv|
           # HEADER
           csv << get_columns(context).map do |attr|
             attr_name(attr)
@@ -26,9 +27,10 @@ module RailsExporter
         end
       end
 
-      def export_to_xml(records, context=:default)
+      def export_to_xml(records, context=:default, params=nil)
+        #TODO: custom options
         #File XML
-        xml = Builder::XmlMarkup.new(:indent => 2)
+        xml = Builder::XmlMarkup.new(indent: 2)
         #Format
         xml.instruct! :xml, :encoding => "UTF-8"
         xml.records do
@@ -46,7 +48,8 @@ module RailsExporter
         end
       end
 
-      def export_to_xls(records, context=:default)
+      def export_to_xls(records, context=:default, params=nil)
+        #TODO: custom options
         #FILE
         file_contents = StringIO.new
         #CHARSET
@@ -72,7 +75,8 @@ module RailsExporter
         file_contents.string.force_encoding('binary')
       end
 
-      def export_to_xlsx(records, context=:default)
+      def export_to_xlsx(records, context=:default, params=nil)
+        #TODO: custom options
         #NEW document/spreadsheet
         workbook = RubyXL::Workbook.new
         worksheet = workbook[0]
