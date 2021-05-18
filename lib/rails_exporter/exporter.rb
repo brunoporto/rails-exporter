@@ -1,6 +1,7 @@
 require 'builder'
 require 'spreadsheet'
 require 'rubyXL'
+require 'rubyXL/convenience_methods/font'
 
 module RailsExporter
   module Exporter
