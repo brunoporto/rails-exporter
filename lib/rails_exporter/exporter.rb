@@ -27,8 +27,8 @@ module RailsExporter
         end
       end
 
-      def export_to_xml(records, context=:default, params=nil)
-        #TODO: custom options
+      def export_to_xml(records, context=:default, params: nil)
+        #TODO: custom params
         #File XML
         xml = Builder::XmlMarkup.new(indent: 2)
         #Format
@@ -48,8 +48,8 @@ module RailsExporter
         end
       end
 
-      def export_to_xls(records, context=:default, params=nil)
-        #TODO: custom options
+      def export_to_xls(records, context=:default, params: nil)
+        #TODO: custom params
         #FILE
         file_contents = StringIO.new
         #CHARSET
@@ -75,8 +75,8 @@ module RailsExporter
         file_contents.string.force_encoding('binary')
       end
 
-      def export_to_xlsx(records, context=:default, params=nil)
-        #TODO: custom options
+      def export_to_xlsx(records, context=:default, params: nil)
+        #TODO: custom params
         #NEW document/spreadsheet
         workbook = RubyXL::Workbook.new
         worksheet = workbook[0]
