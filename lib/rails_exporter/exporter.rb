@@ -15,7 +15,7 @@ module RailsExporter
     module ClassMethods
       def export_to_csv(records, context=:default, params: nil)
         custom_params = {col_sep: ';', force_quotes: true}.merge(params || {})
-        CSV.generate(custom_params) do |csv|
+        CSV.generate(**custom_params) do |csv|
           # HEADER
           csv << get_columns(context).map do |attr|
             attr_name(attr)
